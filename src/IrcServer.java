@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
 /**
-* Represents a IrcServer which can have multiple clients
+* Represents an IrcServer which can have multiple clients
 * (from the corresponding connection) connected and multiple
 * channel opened on.
 */

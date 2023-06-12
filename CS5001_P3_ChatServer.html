@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.1 — by Tristano Ajmone           
+==============================================================================
+Copyright © Tristano Ajmone, 2017, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License 
+
+Copyright (c) Tristano Ajmone, 2017 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017, released
+under the MIT License (MIT); it contains readaptations of substantial portions
+of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CS5001_P3_ChatServer</title>
+  <style type="text/css">
+@charset "UTF-8";
+.markdown-body{
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    color:#24292e;
+    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size:16px;
+    line-height:1.5;
+    word-wrap:break-word;
+    box-sizing:border-box;
+    min-width:200px;
+    max-width:980px;
+    margin:0 auto;
+    padding:45px
+}
+.markdown-body a{
+    color:#0366d6;
+    background-color:transparent;
+    text-decoration:none;
+    -webkit-text-decoration-skip:objects
+}
+.markdown-body a:active,.markdown-body a:hover{
+    outline-width:0
+}
+.markdown-body a:hover{
+    text-decoration:underline
+}
+.markdown-body a:not([href]){
+    color:inherit;
+    text-decoration:none
+}
+.markdown-body strong{
+    font-weight:600
+}
+.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{
+    margin-top:24px;
+    margin-bottom:16px;
+    font-weight:600;
+    line-height:1.25
+}
+.markdown-body h1{
+    font-size:2em;
+    margin:.67em 0;
+    padding-bottom:.3em;
+    border-bottom:1px solid #eaecef
+}
+.markdown-body h2{
+    padding-bottom:.3em;
+    font-size:1.5em;
+    border-bottom:1px solid #eaecef
+}
+.markdown-body h3{
+    font-size:1.25em
+}
+.markdown-body h4{
+    font-size:1em
+}
+.markdown-body h5{
+    font-size:.875em
+}
+.markdown-body h6{
+    font-size:.85em;
+    color:#6a737d
+}
+.markdown-body img{
+    border-style:none
+}
+.markdown-body svg:not(:root){
+    overflow:hidden
+}
+.markdown-body hr{
+    box-sizing:content-box;
+    height:.25em;
+    margin:24px 0;
+    padding:0;
+    overflow:hidden;
+    background-color:#e1e4e8;
+    border:0
+}
+.markdown-body hr::before{
+    display:table;
+    content:""
+}
+.markdown-body hr::after{
+    display:table;
+    clear:both;
+    content:""
+}
+.markdown-body input{
+    margin:0;
+    overflow:visible;
+    font:inherit;
+    font-family:inherit;
+    font-size:inherit;
+    line-height:inherit
+}
+.markdown-body [type=checkbox]{
+    box-sizing:border-box;
+    padding:0
+}
+.markdown-body *{
+    box-sizing:border-box
+}
+.markdown-body blockquote{
+    margin:0
+}
+.markdown-body ol,.markdown-body ul{
+    padding-left:2em
+}
+.markdown-body ol ol,.markdown-body ul ol{
+    list-style-type:lower-alpha
+}
+.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{
+    margin-top:0;
+    margin-bottom:0
+}
+.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{
+    list-style-type:lower-alpha
+}
+.markdown-body li>p{
+    margin-top:16px
+}
+.markdown-body li+li{
+    margin-top:.25em
+}
+.markdown-body dd{
+    margin-left:0
+}
+.markdown-body dl{
+    padding:0
+}
+.markdown-body dl dt{
+    padding:0;
+    margin-top:16px;
+    font-size:1em;
+    font-style:italic;
+    font-weight:600
+}
+.markdown-body dl dd{
+    padding:0 16px;
+    margin-bottom:16px
+}
+.markdown-body code{
+    font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace
+}
+.markdown-body pre{
+    font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    word-wrap:normal
+}
+.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{
+    margin-top:0;
+    margin-bottom:16px
+}
+.markdown-body blockquote{
+    padding:0 1em;
+    color:#d45555;
+    border-left:.25em solid #d45555
+}
+.markdown-body blockquote>:first-child{
+    margin-top:0
+}
+.markdown-body blockquote>:last-child{
+    margin-bottom:0
+}
+.markdown-body table{
+    display:block;
+    width:100%;
+    overflow:auto;
+    border-spacing:0;
+    border-collapse:collapse
+}
+.markdown-body table th{
+    font-weight:600
+}
+.markdown-body table td,.markdown-body table th{
+    padding:6px 13px;
+    border:1px solid #dfe2e5
+}
+.markdown-body table tr{
+    background-color:#fff;
+    border-top:1px solid #c6cbd1
+}
+.markdown-body table tr:nth-child(2n){
+    background-color:#f6f8fa
+}
+.markdown-body img{
+    max-width:100%;
+    box-sizing:content-box;
+    background-color:#fff
+}
+.markdown-body code{
+    padding:.2em 0;
+    margin:0;
+    font-size:85%;
+    background-color:rgba(27,31,35,.05);
+    border-radius:3px
+}
+.markdown-body code::after,.markdown-body code::before{
+    letter-spacing:-.2em;
+    content:" "
+}
+.markdown-body pre>code{
+    padding:0;
+    margin:0;
+    font-size:100%;
+    word-break:normal;
+    white-space:pre;
+    background:0 0;
+    border:0
+}
+.markdown-body .highlight{
+    margin-bottom:16px
+}
+.markdown-body .highlight pre{
+    margin-bottom:0;
+    word-break:normal
+}
+.markdown-body .highlight pre,.markdown-body pre{
+    padding:16px;
+    overflow:auto;
+    font-size:85%;
+    line-height:1.45;
+    background-color:#f6f8fa;
+    border-radius:3px
+}
+.markdown-body pre code{
+    display:inline;
+    max-width:auto;
+    padding:0;
+    margin:0;
+    overflow:visible;
+    line-height:inherit;
+    word-wrap:normal;
+    background-color:transparent;
+    border:0
+}
+.markdown-body pre code::after,.markdown-body pre code::before{
+    content:normal
+}
+.markdown-body .full-commit .btn-outline:not(:disabled):hover{
+    color:#005cc5;
+    border-color:#005cc5
+}
+.markdown-body kbd{
+    box-shadow:inset 0 -1px 0 #959da5;
+    display:inline-block;
+    padding:3px 5px;
+    font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    color:#444d56;
+    vertical-align:middle;
+    background-color:#fcfcfc;
+    border:1px solid #c6cbd1;
+    border-bottom-color:#959da5;
+    border-radius:3px;
+    box-shadow:inset 0 -1px 0 #959da5
+}
+.markdown-body :checked+.radio-label{
+    position:relative;
+    z-index:1;
+    border-color:#0366d6
+}
+.markdown-body .task-list-item{
+    list-style-type:none
+}
+.markdown-body .task-list-item+.task-list-item{
+    margin-top:3px
+}
+.markdown-body .task-list-item input{
+    margin:0 .2em .25em -1.6em;
+    vertical-align:middle
+}
+.markdown-body::before{
+    display:table;
+    content:""
+}
+.markdown-body::after{
+    display:table;
+    clear:both;
+    content:""
+}
+.markdown-body>:first-child{
+    margin-top:0!important
+}
+.markdown-body>:last-child{
+    margin-bottom:0!important
+}
+.Alert,.Error,.Note,.Success,.Warning{
+    padding:11px;
+    margin-bottom:24px;
+    border-style:solid;
+    border-width:1px;
+    border-radius:4px
+}
+.Alert p,.Error p,.Note p,.Success p,.Warning p{
+    margin-top:0
+}
+.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{
+    margin-bottom:0
+}
+.Alert{
+    color:#246;
+    background-color:#e2eef9;
+    border-color:#bac6d3
+}
+.Warning{
+    color:#4c4a42;
+    background-color:#fff9ea;
+    border-color:#dfd8c2
+}
+.Error{
+    color:#911;
+    background-color:#fcdede;
+    border-color:#d2b2b2
+}
+.Success{
+    color:#22662c;
+    background-color:#e2f9e5;
+    border-color:#bad3be
+}
+.Note{
+    color:#2f363d;
+    background-color:#f6f8fa;
+    border-color:#d5d8da
+}
+.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{
+    color:#246;
+    margin-bottom:0
+}
+.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{
+    color:#4c4a42;
+    margin-bottom:0
+}
+.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{
+    color:#911;
+    margin-bottom:0
+}
+.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{
+    color:#22662c;
+    margin-bottom:0
+}
+.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{
+    color:#2f363d;
+    margin-bottom:0
+}
+.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{
+    margin-top:0
+}
+h1.title,p.subtitle{
+    text-align:center
+}
+h1.title.followed-by-subtitle{
+    margin-bottom:0
+}
+p.subtitle{
+    font-size:1.5em;
+    font-weight:600;
+    line-height:1.25;
+    margin-top:0;
+    margin-bottom:16px;
+    padding-bottom:.3em
+}
+div.line-block{
+    white-space:pre-line
+}
+  </style>
+  <style type="text/css">
+    code{
+      white-space: pre
+    }
+    figure{
+      text-align:center
+    }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article class="markdown-body">
+<header>
+<h1 class="title"><div class="line-block">CS5001 Object-Oriented Modelling, Design and Programming<br />
+Practical 3 – Chat Server</div></h1>
+<p class="author"><div class="line-block">School of Computer Science<br />
+University of St Andrews</div></p>
+<p class="date"><div class="line-block">Due Friday week 9, weighting 20%<br />
+MMS is the definitive source for deadlines and weightings.</div></p>
+</header>
+<p>In this practical, you are required to write a Java chat server which implements a simplified version of the IRC protocol, allowing connected users to join channels and send each other messages.</p>
+<h1 id="setup">Setup</h1>
+<p>For this practical, you may develop your code in any IDE or editor of your choice. However, please ensure that you create a suitable assignment directory <code>CS5001-p3-chatserver</code> on the computer you’re using. All your source code should be in a <code>src</code> directory inside your assignment directory, <code>CS5001-p3-chatserver/src</code>, and your main method should be in an <code>IrcServerMain</code> class in <code>IrcServerMain.java</code>.</p>
+<h1 id="internet-relay-chat-irc">Internet Relay Chat (IRC)</h1>
+<p>IRC is a protocol for text-based chat that developed gradually from the late 1980s into the early 2000s. It was one of the first widely used chat protocols, and still forms the backend of a wide variety of chat services. There is no universally agreed specification, and different implementations include different features, but the core functionality is the same across most active servers.</p>
+<p>An IRC server listens on an advertised port for connections from IRC clients. These clients send short strings over a stable TCP connection, to register, join channels, and send messages. The server then sends these messages onto whichever connected clients are supposed to receive them, along with any appropriate metadata.</p>
+<p>In this practical, you will implement a chat server that should follow the simplified version of the IRC protocol described below. It should accept connections from clients using Java’s <code>Socket</code> and <code>ServerSocket</code> objects, keeping multiple connections alive at once and sending the appropriate updates to each one in real time.</p>
+<p>You only need to write the server for this practical; you don’t need to create a client. However, you will want to test your program, and you can do this using an existing program called <code>telnet</code>, which can send and receive simple strings over TCP. See the <a href="#test-and-debug">Test and Debug</a> section below.</p>
+<p>The main output of your program will be sent over the <code>Socket</code> objects you create. However, you might want to write some debugging information to standard output with <code>System.out</code>.</p>
+<h1 id="the-protocol">The Protocol</h1>
+<p>Your server should accept only certain formats of strings from connected clients, and in some cases it should send a <em>reply</em> to the client. Each supported client message has the form</p>
+<pre><code>&lt;command&gt; &lt;arguments&gt;</code></pre>
+<p>where <code>&lt;command&gt;</code> is equal to <code>NICK</code>, <code>USER</code>, <code>QUIT</code>, <code>JOIN</code>, <code>PART</code>, <code>NAMES</code>, <code>LIST</code>, <code>PRIVMSG</code>, <code>TIME</code>, <code>INFO</code>, or <code>PING</code>. The arguments should then appear after a space, and the arguments that are expected will depend on what the command was.</p>
+<p>If the server needs to send a reply, it will have the form</p>
+<pre><code>:&lt;server_name&gt; &lt;reply_code&gt; &lt;nick&gt; &lt;text&gt;</code></pre>
+<p>where</p>
+<ul>
+<li><code>&lt;server_name&gt;</code> is whatever name was specified for the server on the command line when it was started (see <a href="#compiling-and-running">Compiling and Running</a>);</li>
+<li><code>&lt;reply_code&gt;</code> is a 3-digit number that identifies what sort of reply it is (errors use <code>400</code>);</li>
+<li><code>&lt;nick&gt;</code> is the nickname of the client the reply is being sent to, or <code>*</code> if no nickname has been set; and</li>
+<li><code>&lt;text&gt;</code> is some more text, which will usually start with a colon, and will have a format depending on what sort of reply it is. The colon is there to indicate that the text might contain spaces.</li>
+</ul>
+<p>The different types of command and reply are explained below.</p>
+<h1 id="commands">Commands</h1>
+<p>Your server should support the following commands from clients. The most important ones are listed first, but some of the later ones like <code>TIME</code>, <code>INFO</code> and <code>PING</code> might be the easiest ones to implement, so you could start with these if you want.</p>
+<h2 id="nick">NICK</h2>
+<p>This message is sent by the client in order to declare what nickname the user wants to be known by. The whole message should have the following format:</p>
+<pre><code>NICK &lt;nickname&gt;</code></pre>
+<p>where <code>&lt;nickname&gt;</code> is the chosen nickname. A valid nickname has 1–9 characters, and contains only letters, numbers and underscores. It cannot start with a number.</p>
+<p>If the nickname is valid, the server should remember that this is the nickname for this client, and send no reply. If the nickname is invalid, the server should reject it by sending the reply</p>
+<pre><code>:&lt;server_name&gt; 400 * :Invalid nickname</code></pre>
+<h2 id="user">USER</h2>
+<p>This message should be sent by the client <em>after</em> they have send a <code>NICK</code> message (see <a href="#nick">NICK</a>). The <code>USER</code> message allows the client to specify their <em>username</em> and their <em>real name</em>. It has the following form:</p>
+<pre><code>USER &lt;username&gt; 0 * :&lt;real_name&gt;</code></pre>
+<p>where</p>
+<ul>
+<li><code>&lt;username&gt;</code> is the username, which should not include spaces (the username is stored internally but not used for anything else);</li>
+<li><code>0</code> and <code>*</code> are meaningless (they are used for permissions in full IRC, but you can ignore them for this practical); and</li>
+<li><code>&lt;real_name&gt;</code> is the user’s real full name, which may include spaces.</li>
+</ul>
+<p>If the message is valid, and a nickname has already been set, then the server should store all these details and regard the client as <em>registered</em>. A registered client can send and receive private messages, and join and leave channels. A reply should be sent of the form</p>
+<pre><code>:&lt;server_name&gt; 001 &lt;nick&gt; :Welcome to the IRC network, &lt;nick&gt;</code></pre>
+<p>If the message is invalid, one of the following replies should be sent:</p>
+<pre><code>:&lt;server_name&gt; 400 * :Not enough arguments
+:&lt;server_name&gt; 400 * :Invalid arguments to USER command
+:&lt;server_name&gt; 400 * :You are already registered</code></pre>
+<p>as appropriate.</p>
+<h2 id="quit">QUIT</h2>
+<p>This message indicates that the user wants to end their connection to the server. It has no arguments, so it should just be the message:</p>
+<pre><code>QUIT</code></pre>
+<p>If the client is <em>registered</em> (see <a href="#user">USER</a>) then the server should send the message</p>
+<pre><code>:&lt;nick&gt; QUIT</code></pre>
+<p>to <em>all</em> connected clients (where <code>&lt;nick&gt;</code> is the quitting client’s nickname). The quitting user should also be removed from any channels they may be in (see <a href="#join">JOIN</a>).</p>
+<p>Finally, the connection to the quitting client should be closed.</p>
+<h2 id="join">JOIN</h2>
+<p>This message is sent by a client in order to <em>join</em> a channel. A channel is like a chat room that users can join, and any messages sent to a channel will be seen by all users that are in the channel (see <a href="#privmsg">PRIVMSG</a>).</p>
+<p>This message should have the form:</p>
+<pre><code>JOIN &lt;channel_name&gt;</code></pre>
+<p>where <code>&lt;channel_name&gt;</code> is the name of the channel to join. A channel name must be a single <code>#</code> symbol followed by any number of letters, numbers and underscores.</p>
+<p>If the channel name is valid, this user should be added to that channel. If no channel with this name exists on the server, it should be created. All users in the channel (including the joining user) should be sent the message</p>
+<pre><code>:&lt;nick&gt; JOIN &lt;channel_name&gt;</code></pre>
+<p>to indicate that a new user has joined. That user should then receive all chat messages sent to that channel until they leave the channel or quit the server.</p>
+<p>If the channel name is invalid or the user is not registered, one of the following error messages should be sent:</p>
+<pre><code>:&lt;server_name&gt; 400 * :Invalid channel name
+:&lt;server_name&gt; 400 * :You need to register first</code></pre>
+<p>as appropriate.</p>
+<h2 id="part">PART</h2>
+<p>This message is sent by a client when that user wishes to leave a channel they are in. It has the form:</p>
+<pre><code>PART &lt;channel_name&gt;</code></pre>
+<p>where <code>&lt;channel_name&gt;</code> is the name of the channel they want to leave. If successful, the message</p>
+<pre><code>:&lt;nick&gt; PART &lt;channel_name&gt;</code></pre>
+<p>should be sent to all users in the channel, and the user should be removed from the channel. If the channel is now empty, it should be deleted from the server. If the channel exists, but the user is not in it, the server should do nothing.</p>
+<p>If unsuccessful, one of the following error replies might be necessary:</p>
+<pre><code>:&lt;server_name&gt; 400 * :You need to register first
+:&lt;server_name&gt; 400 * :No channel exists with that name</code></pre>
+<h2 id="privmsg">PRIVMSG</h2>
+<p>This is perhaps the most important command, because it allows registered users to send chat messages to each other! It has the form:</p>
+<pre><code>PRIVMSG &lt;target&gt; :&lt;message&gt;</code></pre>
+<p>where <code>&lt;target&gt;</code> is either a channel name or a user’s nickname, and <code>&lt;message&gt;</code> is the full chat message they want to send, which may include spaces.</p>
+<p>If the message is valid, then a message of the form</p>
+<pre><code>:&lt;sender_nick&gt; PRIVMSG &lt;target&gt; :&lt;message&gt;</code></pre>
+<p>should be sent to all appropriate users, where <code>&lt;sender_nick&gt;</code> is the nickname of the user that sent the message. If <code>&lt;target&gt;</code> is a channel, this should be sent to all users in that channel; if it is a user’s nickname, it should be sent to that user only.</p>
+<p>If the message is invalid, one of the following error messages may be sent:</p>
+<pre><code>:&lt;server_name&gt; 400 * :No channel exists with that name
+:&lt;server_name&gt; 400 * :No user exists with that name
+:&lt;server_name&gt; 400 * :Invalid arguments to PRIVMSG command
+:&lt;server_name&gt; 400 * :You need to register first</code></pre>
+<h2 id="names">NAMES</h2>
+<p>This message is sent by a registered client to request the nicknames of all users in a given channel. It has the form:</p>
+<pre><code>NAMES &lt;channel_name&gt;</code></pre>
+<p>If a channel with the given name exists, the server should send a reply of the following form:</p>
+<pre><code>:&lt;server_name&gt; 353 &lt;nick&gt; = &lt;channel_name&gt; :&lt;nicks&gt;</code></pre>
+<p>where</p>
+<ul>
+<li><code>&lt;server_name&gt;</code> is the server name;</li>
+<li><code>&lt;nick&gt;</code> is the nickname of the user that sent the request;</li>
+<li><code>&lt;channel_name&gt;</code> is the channel being queried;</li>
+<li><code>&lt;nicks&gt;</code> is a space-separated list of the nicknames of all users in the channel, for example <code>moeen zak jos ben jofra jonny</code>.</li>
+</ul>
+<p>The server might need to reply with one of the following error replies:</p>
+<pre><code>:&lt;server_name&gt; 400 * :You need to register first
+:&lt;server_name&gt; 400 * :No channel exists with that name</code></pre>
+<h2 id="list">LIST</h2>
+<p>This message allows a registered client to request the names of all channels on the server. It has no arguments, so the whole message is just:</p>
+<pre><code>LIST</code></pre>
+<p>and the server should reply with one line for each channel, of the form:</p>
+<pre><code>:&lt;server_name&gt; 322 &lt;nick&gt; &lt;channel_name&gt;</code></pre>
+<p>followed by one final line of the form:</p>
+<pre><code>:&lt;server_name&gt; 323 &lt;nick&gt; :End of LIST</code></pre>
+<p>where <code>&lt;nick&gt;</code> is the nickname of the user who sent the <code>LIST</code> command.</p>
+<p>If the user is not registered, they should receive the same error reply as they would for <code>NAMES</code>.</p>
+<h2 id="time">TIME</h2>
+<p>Clients can send the simple message:</p>
+<pre><code>TIME</code></pre>
+<p>to ask the server to respond with the current date and time. The server should send a reply of the form:</p>
+<pre><code>:&lt;server_name&gt; 391 * :&lt;time&gt;</code></pre>
+<p>where <code>&lt;time&gt;</code> is the server’s local time, in the standard ISO 8601 format, something like</p>
+<pre><code>2022-10-13T14:23:34.443757</code></pre>
+<p>This is fairly easy to achieve if you use Java’s <code>java.time.LocalDateTime</code> package. Look it up in the Java API!</p>
+<h2 id="info">INFO</h2>
+<p>The user can request some basic information about the server by sending the message:</p>
+<pre><code>INFO</code></pre>
+<p>The server should send a reply of the form:</p>
+<pre><code>:&lt;server_name&gt; 371 * :&lt;message&gt;</code></pre>
+<p>where <code>&lt;message&gt;</code> is a short string saying what the server is and who wrote it. The exact content of this is up to you, but it should fit on one line, and should not include your real name.</p>
+<h2 id="ping">PING</h2>
+<p>Finally, any client can send a message of the form</p>
+<pre><code>PING &lt;text&gt;</code></pre>
+<p>where <code>&lt;text&gt;</code> is any string of characters. The server should respond with</p>
+<pre><code>PONG &lt;text&gt;</code></pre>
+<p>where <code>&lt;text&gt;</code> is the exact same string sent back. This can be useful for clients to make sure their connection is still active.</p>
+<h1 id="compiling-and-running">Compiling and Running</h1>
+<p>For your program to be compatible with the automated checker:</p>
+<ul>
+<li><p>It should be possible to compile all your source code from within the <code>src</code> directory using the simple command:</p>
+<pre><code>javac *.java</code></pre>
+<p>If you have several packages inside the <code>src</code> directory, the automated checker might be able to pick these up, but you should check this carefully.</p></li>
+<li><p>It must be possible to specify the server name and port on the command line using the <code>String[] args</code> parameter. For example, executing the following command from within the <code>src</code> directory should start your server with the server name <code>hello</code>, on port 12345:</p>
+<pre><code>java IrcServerMain hello 12345</code></pre></li>
+<li><p>If your server is started without supplying the command-line arguments, or with an invalid port number, it should simply print the usage message indicated below and exit:</p>
+<pre><code>Usage: java IrcServerMain &lt;server_name&gt; &lt;port&gt;</code></pre></li>
+</ul>
+<h1 id="running-the-automated-checker">Running the Automated Checker</h1>
+<p>As for previous practicals, we have provided some basic tests. In order to run the automated checker on your program, make sure your code is on a lab machine, <strong>change directory</strong> to your <code>CS5001-p3-chatserver</code> directory, and execute the following command:</p>
+<pre><code>stacscheck /cs/studres/CS5001/Coursework/p3-chatserver/Tests</code></pre>
+<p>If you use a Linux or Mac machine, you can also <a href="https://studres.cs.st-andrews.ac.uk/Library/stacscheck/">install stacscheck on your own computer</a>. However, you should check that your code works on the School infrastructure as well.</p>
+<p>When you are ready to submit, make sure that you also run the checker on the archive you are preparing to submit, by calling, for example:</p>
+<pre><code>stacscheck --archive p3.zip /cs/studres/CS5001/Coursework/p3-chatserver/Tests</code></pre>
+<p>The numbered tests check basic operation of your server. The first few tests check whether the correct usage message is displayed when the command-line arguments are invalid. The remaining tests check how your server responds to a range of possible messages from clients, some valid and some invalid. If any of these fails, then you are not sending back the expected message. In case of failures, the tests should indicate what your program has sent to the client over the socket, along with what we expected you to send.</p>
+<p>If any tests are failing, you should look at the files themselves on StudRes so you can see what they’re doing. Most tests contain the following three files:</p>
+<ul>
+<li><code>progRun.sh</code>: a script that starts a server running, opens a client connection to it, and checks its output;</li>
+<li><code>sendMessages.sh</code>: the script that acts as the client, sending some messages in the protocol and waiting at some points using the <code>sleep</code> command;</li>
+<li><code>expected.out</code>: the text that should be received by the client.</li>
+</ul>
+<p>A few tests also have a <code>sendMessages2.sh</code> script, which simulates a second client that connects to the server at the same time. This tests your server’s ability to handle multiple connections and facilitate two clients sending chat messages to each other.</p>
+<p>Note that <code>Test09</code> and <code>Test10</code> check only part of your output, by searching for a substring using <code>grep</code>. This is because the <code>TIME</code> command produces different output each time you call it, and because the <code>INFO</code> command might have output specific to you, perhaps including your matriculation number. In each case, <code>expected.out</code> should be the <em>start</em> of the output that your server sends.</p>
+<p>The final test, <code>TestQ</code>, runs the style checker over your source code. Pay attention to its output, because it can be really helpful for improving your code quality.</p>
+<h1 id="test-and-debug">Test and Debug</h1>
+<p>In order to test your server manually, you should be able to use simple existing client programs to send messages to your server and print out the reply. You can use <code>telnet</code> from the command line on the lab computers, and this is available on most operating systems if you’re working on your own machine. While running your server on port 12345 in one terminal window, you can open another terminal window on the same machine and type</p>
+<pre><code>telnet localhost 12345</code></pre>
+<p>If your server program accepts the connection, you can then type a message directly into telnet (such as <code>TIME</code>) and the response from the server will be printed immediately below it in the terminal.</p>
+<p>In your own code, take care to flush sockets and close them when appropriate. Otherwise you may not see the responses made by the server on the client and you may have issues running your server program due to sockets being left open.</p>
+<p>You might also consider performing more rigorous automated testing. If you decide to adopt this approach, it is probably a good idea to start by looking at the existing tests on StudRes and follow the same approach. You can create new tests in a local sub-directory in your assignment directory and pass the directory of your own tests to stacscheck when you run it from your assignment directory.</p>
+<p>You can learn more about the automated checker at <a href="https://studres.cs.st-andrews.ac.uk/Library/stacscheck/" class="uri">https://studres.cs.st-andrews.ac.uk/Library/stacscheck/</a>.</p>
+<h1 id="deliverables">Deliverables</h1>
+<p>Along with your source code, you should include a short README file if you have attempted any additional features beyond what this document specified. You should hand in a zip archive of your assignment directory (containing all your source code, any sub-directories, and README), via MMS as usual.</p>
+<p>You do not need to include a README if you have not attempted any additional requirements. However, you should include one if there is anything else in your solution that you want to draw our attention to.</p>
+<h1 id="marking">Marking</h1>
+<p>Grades will be awarded according to the General Mark Descriptors in the <a href="http://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/feedback.html#Mark_Descriptors">Feedback section</a> of the School Student Handbook. The following table shows some example descriptions for projects that would fall into each band.</p>
+<table>
+<colgroup>
+<col style="width: 9%"></col>
+<col style="width: 90%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grade</th>
+<th style="text-align: left;">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1–3</td>
+<td style="text-align: left;">Little or no working code, and little or no understanding shown.</td>
+</tr>
+<tr class="even">
+<td>4–6</td>
+<td style="text-align: left;">Acceptable code for part of the problem, but with serious issues such as not compiling or running. Some understanding of the issues shown.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td style="text-align: left;">A running server that accepts connections from clients, and uses sockets to send and receive strings, that implements commands similar to those in the specification and goes some way towards allowing users to chat. May have bugs, poor style, and many missing features.</td>
+</tr>
+<tr class="even">
+<td>8–10</td>
+<td style="text-align: left;">A reasonably stable server that handles multiple clients at once, and implements several of the listed commands correctly, allowing connected users to chat to each other. Possibly lacks some of the more complex features, has problems with error-handling and poor style. Some documentation.</td>
+</tr>
+<tr class="odd">
+<td>11–13</td>
+<td style="text-align: left;">Implements most of the commands in the specification, with reasonable error-handling and acceptable program design and code quality. Some object-oriented design, and few bugs. Reasonable documentation.</td>
+</tr>
+<tr class="even">
+<td>14–16</td>
+<td style="text-align: left;">Implements almost all of the commands in the specification correctly, with almost all the specified error messages, clear code, a well-structured object-oriented design, and very little code repetition. Good documentation.</td>
+</tr>
+<tr class="odd">
+<td>17–18</td>
+<td style="text-align: left;">Implements all the commands in the specification correctly, with full error-handling including sensible decisions for errors not mentioned in the specification. Clean code in an excellent object-oriented design, with almost no repetition. Excellent documentation.</td>
+</tr>
+<tr class="even">
+<td>19–20</td>
+<td style="text-align: left;">Outstanding implementations of all features as above, and possibly some extra features not mentioned in the specification, with exceptional clarity of design and implementation.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="lateness">Lateness</h1>
+<p>The standard penalty for late submission applies (Scheme B: 1 mark per 8-hour period, or part thereof):</p>
+<p><a href="https://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/assessment.html#lateness-penalties" class="uri">https://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/assessment.html#lateness-penalties</a></p>
+<h1 id="good-academic-practice">Good Academic Practice</h1>
+<p>The University policy on Good Academic Practice applies:</p>
+<p><a href="https://www.st-andrews.ac.uk/students/rules/academicpractice/" class="uri">https://www.st-andrews.ac.uk/students/rules/academicpractice/</a></p>
+</article>
+</body>
+</html>

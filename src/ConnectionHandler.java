@@ -92,28 +92,34 @@ public class ConnectionHandler implements Runnable {
                       <arguments> part might need further partition
                       according to the specification of <command> */
                     else {
-                        arguments = partitionedLine[1];
-                        if (command.equals(Configuration.NICK)) {
-                            setNickname(arguments);
+                        try{
+                            arguments = partitionedLine[1];
+                            if (command.equals(Configuration.NICK)) {
+                                setNickname(arguments);
+                            }
+                            else if (command.equals(Configuration.JOIN)) {
+                                requestJoin(arguments);
+                            }
+                            else if (command.equals(Configuration.PART)) {
+                                requestLeave(arguments);
+                            }
+                            else if (command.equals(Configuration.NAMES)) {
+                                requestNames(arguments);
+                            }
+                            else if (command.equals(Configuration.PRIVMSG)) {
+                                sendPrivateMsg(arguments);
+                            }
+                            else if (command.equals(Configuration.PING)) {
+                                requestPong(arguments);
+                            }
+                            else if (command.equals(Configuration.USER)) {
+                                setUser(arguments);
+                            }
                         }
-                        else if (command.equals(Configuration.JOIN)) {
-                            requestJoin(arguments);
+                        catch (ArrayIndexOutOfBoundsException e) {
+                            printServerReply(Configuration.ERROR_CODE, Configuration.LACKED_USER_ARG);
                         }
-                        else if (command.equals(Configuration.PART)) {
-                            requestLeave(arguments);
-                        }
-                        else if (command.equals(Configuration.NAMES)) {
-                            requestNames(arguments);
-                        }
-                        else if (command.equals(Configuration.PRIVMSG)) {
-                            sendPrivateMsg(arguments);
-                        }
-                        else if (command.equals(Configuration.PING)) {
-                            requestPong(arguments);
-                        }
-                        else if (command.equals(Configuration.USER)) {
-                            setUser(arguments);
-                        }
+
                     }
                 }
             }
@@ -286,7 +292,7 @@ public class ConnectionHandler implements Runnable {
             if (registered) {
                 printServerReply(Configuration.ERROR_CODE, Configuration.USER_ALREADY_REGISTERED);
             }
-            else if (nickname == "*") {
+            else if (nickname.equals("*")) {
                 printServerReply(Configuration.ERROR_CODE, Configuration.NO_NICKNAME);
             }
             else {
@@ -316,13 +322,13 @@ public class ConnectionHandler implements Runnable {
                 + " " + nickname;
         String spaceColonPlusText = " :" + text;
         String spaceEqualPlusText = " =" + text;
-        if (replyCode == Configuration.USER_CODE) {
+        if (replyCode.equals(Configuration.USER_CODE)) {
             this.printToWriter(reply + spaceColonPlusText + ", " + nickname);
         }
-        else if (replyCode == Configuration.NAMES_EXIST_CODE) {
+        else if (replyCode.equals(Configuration.NAMES_EXIST_CODE)) {
             this.printToWriter(reply + spaceEqualPlusText);
         }
-        else if (replyCode == Configuration.LIST_CHAN_CODE) {
+        else if (replyCode.equals(Configuration.LIST_CHAN_CODE)) {
             String intermediate = text.replaceAll("\\#", "\n" + reply + " #");
             intermediate = intermediate.replaceFirst("\n", "") + "\n"
                     + reply.replace(replyCode, Configuration.LIST_END_CODE) + " :" + Configuration.END_OF_LIST;

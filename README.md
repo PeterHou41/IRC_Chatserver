@@ -1,1 +1,1 @@
-# 5001p3-chatserver
+# 5001p3 - IRC chatserver
