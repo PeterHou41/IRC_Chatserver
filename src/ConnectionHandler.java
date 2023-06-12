@@ -92,7 +92,7 @@ public class ConnectionHandler implements Runnable {
                       <arguments> part might need further partition
                       according to the specification of <command> */
                     else {
-                        try{
+                        try {
                             arguments = partitionedLine[1];
                             if (command.equals(Configuration.NICK)) {
                                 setNickname(arguments);
@@ -333,6 +333,13 @@ public class ConnectionHandler implements Runnable {
             intermediate = intermediate.replaceFirst("\n", "") + "\n"
                     + reply.replace(replyCode, Configuration.LIST_END_CODE) + " :" + Configuration.END_OF_LIST;
             this.printToWriter(intermediate);
+        }
+        // Fix the bug of printing the nickname of the user instead of '*'
+        // for the case of not enough arguments.
+        else if (text.contains(Configuration.LACKED_USER_ARG)) {
+            reply = ":" + ircS.getServerName() + " " + replyCode
+                    + " " + "*";
+            this.printToWriter(reply + spaceColonPlusText);
         }
         else {
             this.printToWriter(reply + spaceColonPlusText);
