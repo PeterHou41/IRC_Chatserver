@@ -4,9 +4,9 @@
 all the implemented functions can be
 run and tested in this environment._**
 
-## Instructions to run the program
+# Instructions to run the program
 
-### Server side:
+## Server side:
 
 At the ``/src`` level of the project, compile all the source code using the command 
  ``javac *.java``. Then, the name of the server and the port number should be specified
@@ -30,10 +30,10 @@ If your server program accepts the connection,
 you can then type a message directly into telnet (such as ```TIME```)
 and the response from the server will be printed immediately below it in the terminal.
 
-## Commands
+# Commands
 _Interactive commands supported by the server._
 
-### NICK
+## NICK
 
 This message is sent by the client in order to declare what nickname the user wants to be known by.
 The whole message should have the following format:
@@ -53,9 +53,9 @@ If the nickname is invalid, the server should reject it by sending the reply:
 :<server_name> 400 * :Invalid nickname
 ```
 
-### USER
+## USER
 
-This message should be sent by the client after they have sent a **NICK** message (see **NICK**).
+This message should be sent by the client after they have sent a **NICK** message (see [NICK](#nick)).
 The **USER** message allows the client to specify their username and their real name. 
 It has the following form:
 
@@ -86,7 +86,7 @@ If the message is invalid, one of the following replies should be sent:
 :<server_name> 400 * :You are already registered
 ```
 
-### QUIT
+## QUIT
 
 This message indicates that the user wants to end their connection to the server. It has no arguments,
 and the message looks like:
@@ -95,21 +95,22 @@ and the message looks like:
 QUIT
 ```
 
-If the client is _registered_(see **USER**), then the server should send the message
+If the client is _registered_(see [USER](#user)), then the server should send the message
 
 ```
 :<nickname> QUIT
 ```
 
-to _all_ connected clients. The quitting user should also be removed from any channels they may be in (see **JOIN**).
+to _all_ connected clients.
+The quitting user should also be removed from any channels they may be in (see [JOIN](#join)).
 
 Finally, the connection to the quitting client should be closed. 
 
-### JOIN
+## JOIN
 
 This message is sent by a client in order to join a channel. 
 A channel is like a chat room that users can join, 
-and any messages sent to a channel will be seen by all users that are in the channel (see **PRIVMSG**).
+and any messages sent to a channel will be seen by all users that are in the channel (see [PRIVMSG](#privmsg)).
 
 This message should have the form:
 
@@ -139,7 +140,7 @@ If the channel name is invalid or the user is not registered, one of the followi
 :<server_name> 400 * :You need to register first
 ```
 
-### PART
+## PART
 
 This message is sent by a client when that user wishes to leave a channel they are in. It has the form:
 
@@ -165,7 +166,7 @@ If unsuccessful, one of the following error replies might be necessary:
 :<server_name> 400 * :No channel exists with that name
 ```
 
-### PRIVMSG
+## PRIVMSG
 
 Perhaps the most important command as it allows registered users to send chat messages to each other.
 It has the form:
@@ -197,7 +198,7 @@ If the message is invalid, one of the following error messages may be sent:
 :<server_name> 400 * :You need to register first
 ```
 
-### NAMES
+## NAMES
 
 This message is sent by a registered client to request the nicknames of all users in a given channel. 
 It has the form:
@@ -227,7 +228,7 @@ The server might need to reply with one of the following error replies:
 :<server_name> 400 * :No channel exists with that name
 ```
 
-### LIST
+## LIST
 
 This message allows a registered client to request the names of all channels on the server.
 It has no arguments, so the whole message is just:
@@ -253,7 +254,7 @@ If the user is not registered, they should receive the same error reply as they 
 
 
 
-### TIME
+## TIME
 
 Clients can send the simple message:
 
@@ -273,7 +274,7 @@ where ```<time>``` is the server’s local time, in the standard **ISO 8601** fo
 2023-06-13T18:02:42.370473509
 ```
 
-### INFO
+## INFO
 
 The user can request some basic information about the server by sending the message:
 
@@ -289,7 +290,7 @@ The server should send a reply of the form:
 
 where ```<message>``` is a short string saying what the server is and who wrote it.
 
-### PING
+## PING
 
 Finally, any client can send a message of the form
 
