@@ -1,0 +1,4 @@
+:irc.example.com 001 antman12 :Welcome to the IRC network, antman12
+:antman12 JOIN #insects
+:antman12 PART #insects
+:antman12 QUIT

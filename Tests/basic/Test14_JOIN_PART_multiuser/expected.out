@@ -1,0 +1,6 @@
+:irc.example.com 001 Alice :Welcome to the IRC network, Alice
+:Alice JOIN #guitars
+:Bob JOIN #guitars
+:Bob PRIVMSG #guitars :Hi guys
+:Alice PART #guitars
+:Alice QUIT

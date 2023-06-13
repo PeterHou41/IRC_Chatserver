@@ -1,0 +1,8 @@
+:irc.example.com 001 Alice :Welcome to the IRC network, Alice
+:Alice JOIN #bananas
+:irc.example.com 322 Alice #bananas
+:irc.example.com 322 Alice #grapes
+:irc.example.com 322 Alice #ultimatefrisbee
+:irc.example.com 323 Alice :End of LIST
+:Bob QUIT
+:Alice QUIT

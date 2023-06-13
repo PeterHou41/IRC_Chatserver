@@ -1,0 +1,3 @@
+:irc.example.com 001 antman12 :Welcome to the IRC network, antman12
+:irc.example.com 400 antman12 :No channel exists with that name
+:antman12 QUIT

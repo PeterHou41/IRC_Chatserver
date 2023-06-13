@@ -1,0 +1,4 @@
+:irc.example.com 001 Alice :Welcome to the IRC network, Alice
+:Bob PRIVMSG Alice :Hello Alice!
+:Bob QUIT
+:Alice QUIT

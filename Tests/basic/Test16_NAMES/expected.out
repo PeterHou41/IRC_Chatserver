@@ -1,0 +1,4 @@
+:irc.example.com 001 superman :Welcome to the IRC network, superman
+:superman JOIN #flying
+:irc.example.com 353 superman = #flying :superman
+:superman QUIT

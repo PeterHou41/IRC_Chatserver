@@ -1,0 +1,13 @@
+:irc.example.com 001 Jim :Welcome to the IRC network, Jim
+:Jim JOIN #alas
+:irc.example.com 322 Jim #alas
+:irc.example.com 323 Jim :End of LIST
+:Humpy JOIN #alas
+:Bernie JOIN #alas
+:irc.example.com 353 Jim = #alas :Jim Humpy Bernie
+:Jim PRIVMSG #alas :Humphrey and Bernard, come in please!
+:Humpy PRIVMSG #alas :Yes prime minister.
+:Bernie PRIVMSG #alas :Yes prime minister.
+:Humpy QUIT
+:Bernie QUIT
+:Jim QUIT

@@ -1,0 +1,3 @@
+:irc.example.com 001 Rorschach :Welcome to the IRC network, Rorschach
+:Rorschach PRIVMSG Rorschach :Hello to myself
+:Rorschach QUIT
